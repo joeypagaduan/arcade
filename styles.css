@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Megrim&family=Rubik+Moonrocks&family=Silkscreen&display=swap');
+
+/* font-family: 'Faster One', cursive;
+font-family: 'Megrim', cursive;
+font-family: 'Rubik Moonrocks', cursive;
+font-family: 'Silkscreen', cursive; */
+
+/* @font-face {
+  font-family: "fasterOne";
+  src: url ('./fonts/FasterOne-Regular.ttf');
+} */
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+#score_text {
+  font-size: 2em;
+  font-family: 'Rubik Moonrocks', cursive;
+}
+
+#score {
+  font-size: 2em;
+  font-family: 'Faster One', cursive;
+}
+
+canvas {
+    -webkit-box-shadow: 4px -4px 15px 0px #FF1F1F, 12px -11px 7px 0px #FF9376, 20px -5px 7px 0px #FFE264, 20px 6px 7px 0px #F6FF33, 13px 12px 17px 0px #FF9527, 2px 17px 17px 0px #FF0000, -9px 21px 18px 0px #FFF212, -9px 6px 11px 0px #FF0808, -11px -9px 11px 0px #FFFA17, -11px -9px 11px 0px #FFFA17, 6px 6px 7px 1px rgba(0,0,0,0); 
+    box-shadow: 4px -4px 15px 0px #FF1F1F, 12px -11px 7px 0px #FF9376, 20px -5px 7px 0px #FFE264, 20px 6px 7px 0px #F6FF33, 13px 12px 17px 0px #FF9527, 2px 17px 17px 0px #FF0000, -9px 21px 18px 0px #FFF212, -9px 6px 11px 0px #FF0808, -11px -9px 11px 0px #FFFA17, -11px -9px 11px 0px #FFFA17, 6px 6px 7px 1px rgba(0,0,0,0);
+}
+
+#gameBoard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
