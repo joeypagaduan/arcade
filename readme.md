@@ -13,12 +13,13 @@
         <!-- [] walls -->
 
 [] EXTRAS
-        [] more than one food
+        <!-- [] more than one food -->
         [] food does different things
-            -speed up
-            -slow down
+            <!-- -speed up -->
+            <!-- -slow down -->
             -poisonous
             -super-growth
-        [] wrap-around walls
+        <!-- [] teleport -->
         [] grid-size selector
         [] difficulty selector# arcade
+# arcade

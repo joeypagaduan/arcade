@@ -13,16 +13,19 @@
         <h1><span id="score_text">Score: </span><span id="score">0</span></h1>
     </header>
 
-    <canvas id="gameBoard"></canvas>
+    <div id="game">
+        <canvas id="gameBoard"></canvas>
+    </div>
 
 <!-- inputting canvas size -->
 <!-- <form>
-    <label for="canvasWidth">Canvas Width:</label>
-    <input type="number" id="canvasWidth" name="canvasWidth" value="600">
-    <label for="canvasHeight">Canvas Height:</label>
-    <input type="number" id="canvasHeight" name="canvasHeight" value="600">
+    <label for="canvasWidth">Set Width:</label>
+    <input type="number" id="canvasWidth" name="canvasWidth" min="300" max="600">
+    <label for="canvasHeight">Set Height:</label>
+    <input type="number" id="canvasHeight" name="canvasHeight" min="300" max="600">
     <button id="canvasSizeBtn">Set Size</button>
 </form>     -->
+<!-- inputting canvas size -->
 
     <script type="text/javascript" src="./app.js"></script>
 </body>

@@ -4,32 +4,40 @@ const snakeBody = "red";
 const snakeBorder = "red";
 
 let snake = [
-    {x: 300, y: 200},
-    {x: 290, y: 200},
-    {x: 280, y: 200},
-    {x: 270, y: 200},
-    {x: 260, y: 200},
-    {x: 250, y: 200},
-    {x: 240, y: 200},
-    {x: 230, y: 200},
-    {x: 220, y: 200}
+    {x: 200, y: 200},
+    {x: 190, y: 200},
+    {x: 180, y: 200},
+    {x: 170, y: 200},
+    {x: 160, y: 200},
+    {x: 150, y: 200},
+    {x: 140, y: 200},
+    {x: 130, y: 200},
+    {x: 120, y: 200}
 ]
 
+let snakeSpeed = 10;
 let dx = 10;
 let dy = 0;
 
 //init. food
 
-let growthX
-let growthY
-
+let growthX;
+let growthY;
+let speedX;
+let speedY;
+let slowX;
+let slowY;
+let snakehole1x;
+let snakehole1y;
+let snakehole2x;
+let snakehole2y;
 
 
 //my gameboard
 const board = document.getElementById("gameBoard");
 const boardContext = gameBoard.getContext("2d");
-//setting the size
 
+// //#region setting the size
 // const canvasSizeBtn = document.getElementById("canvasSizeBtn");
 // canvasSizeBtn.addEventListener("click", setCanvasSize);
 
@@ -42,7 +50,7 @@ const boardContext = gameBoard.getContext("2d");
 //   height = canvasHeight;
 //   clearCanvas();
 // }
-
+//#endregion
 
 const width = 500;
 const height = 500;
@@ -67,32 +75,41 @@ gameBoard.height = height;
 }
 
 main();
-generateGrowth()
+generateSpeed();
+generateSlow();
+generateGrowth();
+snakehole1();
+snakehole2();
 document.addEventListener("keydown", nextDirection);
 
-function main() {  
+function main() {
     timeoutId = setTimeout(function tick() 
     {    
       clearCanvas();    
       slither();  
       drawSnake();
       drawGrowth();
+      drawSpeed();
+      drawSlow();
+      drawSnakehole1();
+      drawSnakehole2();
       main();
-    }, 75)
+    }, 750 / snakeSpeed)
 
     if (gameOver()) {
         boardContext.fillStyle="white";
         boardContext.font="6vw garamond";
         boardContext.fillText("Game Over", gameBoard.clientWidth/11, gameBoard.clientHeight/2);
-        
-        //// Display game over message
-        // const message = document.createElement('div');
-        // message.textContent = 'Game Over!';
-        // document.body.appendChild(message);
-        // Stop the game loop
         clearTimeout(timeoutId);
       }
  }
+//snake speed
+ const increaseSpeed = () => {
+  snakeSpeed += 3;
+}
+const decreaseSpeed = () => {
+  snakeSpeed -= 1;
+}
 
 function drawSnake() {
     snake.forEach(drawSnakePart)
@@ -125,13 +142,88 @@ function drawSnake() {
   function drawGrowth() {
     boardContext.fillStyle = 'white';
     boardContext.strokeStyle = 'white';
+
+    //square fruit
     // boardContext.fillRect(growthX, growthY, 10, 10);
     // boardContext.strokeRect(growthX, growthY, 10, 10);
+
+    //circular fruit
     boardContext.beginPath();
     boardContext.arc(growthX + 5, growthY + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
     boardContext.fill();
   }
+
+  function generateSpeed() {
+    speedX = random_food(0, gameBoard.width - 10);
+    speedY = random_food(0, gameBoard.height - 10);
+      ////generate where snake is not/////
+    snake.forEach(function has_snake_eaten_food(part) {
+      const eatenSpeed = part.x == speedX && part.y == speedY;
+      if (eatenSpeed) generateSpeed();
+    });
+  }
+
+  function drawSpeed() {
+    boardContext.fillStyle = 'yellow';
+    boardContext.strokeStyle = 'yellow';
+    boardContext.beginPath();
+    boardContext.arc(speedX + 5, speedY + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
+    boardContext.fill();
+  }
+
+  function generateSlow() {
+    slowX = random_food(0, gameBoard.width - 10);
+    slowY = random_food(0, gameBoard.height - 10);
+      ////generate where snake is not/////
+    snake.forEach(function has_snake_eaten_food(part) {
+      const eatenSlow = part.x == slowX && part.y == slowY;
+      if (eatenSlow) generateSlow();
+    });
+  }
+
+  function drawSlow() {
+    boardContext.fillStyle = 'red';
+    boardContext.strokeStyle = 'red';
+    boardContext.beginPath();
+    boardContext.arc(slowX + 5, slowY + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
+    boardContext.fill();
+  }
   //#FOOD ENDS
+
+  //#worm(snake)hole
+  function snakehole1() {
+    snakehole1x = random_food(0, gameBoard.width - 10);
+    snakehole1y = random_food(0, gameBoard.height - 10);
+      ////generate where snake is not/////
+    snake.forEach(function has_snake_eaten_food(part) {
+      const teleport1 = part.x == snakehole1x && part.y == snakehole1y;
+    });
+  }
+
+  function drawSnakehole1() {
+    boardContext.fillStyle = 'black';
+    boardContext.strokeStyle = 'black';
+    boardContext.beginPath();
+    boardContext.arc(snakehole1x + 5, snakehole1y + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
+    boardContext.fill();
+  }
+
+  function snakehole2() {
+    snakehole2x = random_food(0, gameBoard.width - 10);
+    snakehole2y = random_food(0, gameBoard.height - 10);
+      ////generate where snake is not/////
+    snake.forEach(function has_snake_eaten_food(part) {
+      const teleport2 = part.x == snakehole2x && part.y == snakehole2y;
+    });
+  }
+
+  function drawSnakehole2() {
+    boardContext.fillStyle = 'black';
+    boardContext.strokeStyle = 'black';
+    boardContext.beginPath();
+    boardContext.arc(snakehole2x + 5, snakehole2y + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
+    boardContext.fill();
+  }
 
   //Changing the snake's direction
   function nextDirection(event) {
@@ -159,11 +251,43 @@ function drawSnake() {
     const head = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(head);
     const eatenGrowth_food = snake[0].x === growthX && snake[0].y === growthY;
+    const eatenSpeed_food = snake[0].x === speedX && snake[0].y === speedY;
+    const eatenSlow_food = snake[0].x === slowX && snake[0].y === slowY;
+    const teleported1 = snake[0].x === snakehole1x && snake[0].y === snakehole1y;
+    const teleported2 = snake[0].x === snakehole2x && snake[0].y === snakehole2y;
     if (eatenGrowth_food) {
       score += 10;
       document.getElementById('score').innerHTML = score;
       generateGrowth();
-    } else {
+    } 
+    else if (eatenSpeed_food) {
+      score += 100;
+      document.getElementById('score').innerHTML = score;
+      increaseSpeed();
+      generateSpeed();
+      snake.pop();
+    }
+    else if (eatenSlow_food) {
+      score -= 10;
+      document.getElementById('score').innerHTML = score;
+      decreaseSpeed();
+      generateSlow();
+    }
+    else if (teleported1) {
+      score +=50;
+      document.getElementById('score').innerHTML = score;
+      snake[0].x = snakehole2x;
+      snake[0].y = snakehole2y;
+      snakehole1();
+    }
+    else if (teleported2) {
+      score +=50;
+      document.getElementById('score').innerHTML = score;
+      snake[0].x = snakehole1x;
+      snake[0].y = snakehole1y;
+      snakehole2();
+    }
+    else {
       snake.pop();
     }
   }

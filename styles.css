@@ -17,12 +17,12 @@ header {
 
 #score_text {
   font-size: 2em;
-  font-family: 'Rubik Moonrocks', cursive;
+  font-family: 'Silkscreen', cursive;
 }
 
 #score {
   font-size: 2em;
-  font-family: 'Faster One', cursive;
+  font-family: 'Silkscreen', cursive;
 }
 
 canvas {
