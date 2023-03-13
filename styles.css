@@ -10,18 +10,15 @@ font-family: 'Silkscreen', cursive; */
   src: url ('./fonts/FasterOne-Regular.ttf');
 } */
 
+* {
+  background-color: black;
+}
+
 header {
   display: flex;
-  justify-content: center;
-}
-
-#score_text {
-  font-size: 2em;
-  font-family: 'Silkscreen', cursive;
-}
-
-#score {
-  font-size: 2em;
+  justify-content: space-evenly;
+  color: white;
+  font-size: 4em;
   font-family: 'Silkscreen', cursive;
 }
 
@@ -36,3 +33,45 @@ canvas {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+#buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#difficulty {
+  color: white;
+  font-size: 2em;
+  background-color: green;
+}
+
+#easy_button {
+  background-color: red;
+  color: white;
+  border: none;
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#medium_button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#hard_button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}

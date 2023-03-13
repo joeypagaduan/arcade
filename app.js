@@ -1,4 +1,5 @@
-let score = 0
+let score = 0;
+let hiScore = 0;
 
 const snakeBody = "red";
 const snakeBorder = "red";
@@ -15,6 +16,7 @@ let snake = [
     {x: 120, y: 200}
 ]
 
+//init. speed
 let snakeSpeed = 10;
 let dx = 10;
 let dy = 0;
@@ -81,12 +83,16 @@ generateGrowth();
 snakehole1();
 snakehole2();
 document.addEventListener("keydown", nextDirection);
+document.getElementById('easy_button').addEventListener('click', easyGame);
+document.getElementById('medium_button').addEventListener('click', mediumGame);
+document.getElementById('hard_button').addEventListener('click', hardGame);
 
 function main() {
     timeoutId = setTimeout(function tick() 
     {    
       clearCanvas();    
-      slither();  
+      slither(); 
+      hiScoreUpdate(); 
       drawSnake();
       drawGrowth();
       drawSpeed();
@@ -98,33 +104,36 @@ function main() {
 
     if (gameOver()) {
         boardContext.fillStyle="white";
-        boardContext.font="6vw garamond";
+        boardContext.font="3vw Silkscreen";
         boardContext.fillText("Game Over", gameBoard.clientWidth/11, gameBoard.clientHeight/2);
         clearTimeout(timeoutId);
       }
  }
-//snake speed
+//#region snake speed adjusting
  const increaseSpeed = () => {
   snakeSpeed += 3;
 }
 const decreaseSpeed = () => {
-  snakeSpeed -= 1;
+  snakeSpeed -= 2;
 }
+//#endregion
 
+//#region draw my snake
 function drawSnake() {
     snake.forEach(drawSnakePart)
   }
   
-  //individual snake parts
-  function drawSnakePart(snakePart) {
+
+function drawSnakePart(snakePart) {
     boardContext.fillStyle = snakeBody;
     boardContext.strokeStyle = snakeBorder;
     boardContext.fillRect(snakePart.x, snakePart.y, 10, 10);
     boardContext.strokeRect(snakePart.x, snakePart.y, 10, 10);
   }
+  //#endregion
 
-  //#FOOD BEGINS
-  //function to generate random coordinates for food
+  //#region food begins
+    //randon coordinates for food
   function random_food(min, max) {
     return Math.round((Math.random() * (max-min) + min) / 10) * 10;
   }
@@ -188,9 +197,9 @@ function drawSnake() {
     boardContext.arc(slowX + 5, slowY + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
     boardContext.fill();
   }
-  //#FOOD ENDS
+  //#endregion
 
-  //#worm(snake)hole
+  //#region worm(snake)hole
   function snakehole1() {
     snakehole1x = random_food(0, gameBoard.width - 10);
     snakehole1y = random_food(0, gameBoard.height - 10);
@@ -224,8 +233,9 @@ function drawSnake() {
     boardContext.arc(snakehole2x + 5, snakehole2y + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
     boardContext.fill();
   }
+  //#endregion
 
-  //Changing the snake's direction
+  //#region Changing the snake's direction
   function nextDirection(event) {
     const up = dy === -10;
     const down = dy === 10;
@@ -246,7 +256,9 @@ function drawSnake() {
         dy = 0;
     }
   }
-
+  //#endregion
+  
+  //#region snake movement and event handling
   function slither() {
     const head = {x: snake[0].x + dx, y: snake[0].y + dy};
     snake.unshift(head);
@@ -291,8 +303,24 @@ function drawSnake() {
       snake.pop();
     }
   }
- 
+ //#endregion
 
+ function hiScoreUpdate () {
+  if (score > hiScore) {
+    hiScore = score;
+    document.getElementById('hi_score').innerHTML = hiScore;
+  }
+}
+
+  // function updateHiScore() {
+  //   if (score > hiScore) {
+  //     hiScore = score;
+  //   }
+  //   const hiScoreElement = document.getElementById("hiScore");
+  //   hiScoreElement.innerText = hiScore.toString();
+  // }
+
+  //gameover conditions
   function gameOver() {
     for (let i = 1; i < snake.length; i++) {
       if (snake[i].x === snake[0].x && snake[i].y === snake[0].y)
@@ -305,4 +333,65 @@ function drawSnake() {
     return hitLeft || hitRight || hitTopt || hitBottom
   }
 
+  //#region Reset Game
+  function easyGame() {
+    score = 0;
+    document.getElementById('score').innerHTML = score;
+    snake = [
+      {x: 200, y: 200},
+      {x: 190, y: 200},
+      {x: 180, y: 200},
+      {x: 170, y: 200},
+      {x: 160, y: 200},
+      {x: 150, y: 200},
+      {x: 140, y: 200},
+      {x: 130, y: 200},
+      {x: 120, y: 200}
+  ]
+    snakeSpeed = 5;
+    dx = 5;
+    dy = 0; 
+    main();
+  }
+
+  function mediumGame() {
+    score = 0;
+    document.getElementById('score').innerHTML = score;
+    snake = [
+      {x: 200, y: 200},
+      {x: 190, y: 200},
+      {x: 180, y: 200},
+      {x: 170, y: 200},
+      {x: 160, y: 200},
+      {x: 150, y: 200},
+      {x: 140, y: 200},
+      {x: 130, y: 200},
+      {x: 120, y: 200}
+  ]
+    snakeSpeed = 10;
+    dx = 10;
+    dy = 0; 
+    main();
+  }
+
+  function hardGame() {
+    score = 0;
+    document.getElementById('score').innerHTML = score;
+    snake = [
+      {x: 200, y: 200},
+      {x: 190, y: 200},
+      {x: 180, y: 200},
+      {x: 170, y: 200},
+      {x: 160, y: 200},
+      {x: 150, y: 200},
+      {x: 140, y: 200},
+      {x: 130, y: 200},
+      {x: 120, y: 200}
+  ]
+    snakeSpeed = 20;
+    dx = 20;
+    dy = 0; 
+    main();
+  }
+  //#endregion
  
