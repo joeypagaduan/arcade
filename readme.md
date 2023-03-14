@@ -17,9 +17,7 @@
         [] food does different things
             <!-- -speed up -->
             <!-- -slow down -->
-            -poisonous
-            -super-growth
         <!-- [] teleport -->
-        [] grid-size selector
-        [] difficulty selector# arcade
+        <!-- [] reset -->
+        <!-- [] difficulty selector# arcade -->
 # arcade

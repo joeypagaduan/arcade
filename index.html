@@ -13,19 +13,25 @@
         <div><span id="score_text">Score: </span><span id="score">0</span></div>
         <div><span id="hi_score_text">Hi-Score: </span><span id="hi_score">0</span></div>
     </header>
-    <div id="game">
-        <canvas id="gameBoard"></canvas>
-    </div>
-    <div id="difficulty">
-        <p>Difficulty</p>
-    </div>
-    <div id="buttons">
-        <button id="easy_button">Easy</button>
-        <button id="medium_button">Medium</button>
-        <button id="hard_button">Hard</button>
-    </div>
     
-
+    <div id="big_container">
+        <div id="game">
+            <canvas id="gameBoard"></canvas>
+        </div>
+        <div id="container">
+            <div id="difficulty">
+                <p>Difficulty</p>
+            </div>
+            <div id="buttons">
+                <button id="easy_button">Easy</button>
+                <button id="medium_button">Medium</button>
+                <button id="hard_button">Hard</button>
+            </div>
+        </div>
+    </div>
+    <audio id="bg_music" loop>
+        <source src="./fx/risk-136788.mp3" type="audio/mpeg">
+    </audio>
 <!-- inputting canvas size -->
 <!-- <form>
     <label for="canvasWidth">Set Width:</label>

@@ -18,7 +18,7 @@ header {
   display: flex;
   justify-content: space-evenly;
   color: white;
-  font-size: 4em;
+  font-size: 4vw;
   font-family: 'Silkscreen', cursive;
 }
 
@@ -28,7 +28,8 @@ canvas {
 }
 
 #gameBoard {
-    position: absolute;
+    position: fixed;
+    width: 35%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -40,28 +41,32 @@ canvas {
 }
 
 #difficulty {
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'Rubik Moonrocks', cursive;
   color: white;
-  font-size: 2em;
-  background-color: green;
+  font-size: 2.5vw;
+  padding-right: 40px;
 }
 
 #easy_button {
-  background-color: red;
+  background-color: green;
   color: white;
   border: none;
   margin-left: 20px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1.5vw;
   cursor: pointer;
   border-radius: 5px;
 }
 
 #medium_button {
-  background-color: red;
-  color: white;
+  background-color: yellow;
+  color: green;
   border: none;
+  margin-left: 20px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1vw;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -70,8 +75,9 @@ canvas {
     background-color: red;
     color: white;
     border: none;
+    margin-left: 20px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1vw;
     cursor: pointer;
     border-radius: 5px;
 }

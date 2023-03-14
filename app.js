@@ -53,12 +53,12 @@ const boardContext = gameBoard.getContext("2d");
 //   clearCanvas();
 // }
 //#endregion
-
 const width = 500;
 const height = 500;
 const squareSize = 10;
 gameBoard.width = width;
 gameBoard.height = height;
+
 
  // coloring the board
  function clearCanvas() {
@@ -86,6 +86,8 @@ document.getElementById('easy_button').addEventListener('click', easyGame);
 document.getElementById('medium_button').addEventListener('click', mediumGame);
 document.getElementById('hard_button').addEventListener('click', hardGame);
 const buttons = document.querySelector('#container');
+const bgMusic = document.getElementById('bg_music');
+const gameOverFx = new Audio("./fx/game-over-arcade-6435.mp3")
 
 //GameState
 function main() {
@@ -101,6 +103,7 @@ function main() {
       drawSlow();
       drawSnakehole1();
       drawSnakehole2();
+      bgMusic.play();
       main();
     }, 750 / snakeSpeed)
 
@@ -108,8 +111,10 @@ function main() {
         buttons.style.display = '';
         boardContext.fillStyle="white";
         boardContext.font="3vw Silkscreen";
-        boardContext.fillText("Game Over", gameBoard.clientWidth/11, gameBoard.clientHeight/2);
+        boardContext.fillText("Game Over", gameBoard.clientWidth/5, gameBoard.clientHeight/2.25);
+        bgMusic.pause();
         clearTimeout(timeoutId);
+        gameOverFx.play();
       }
  }
  
