@@ -40,21 +40,27 @@ const board = document.getElementById("gameBoard");
 const boardContext = gameBoard.getContext("2d");
 
 // //#region setting the size
-// const canvasSizeBtn = document.getElementById("canvasSizeBtn");
-// canvasSizeBtn.addEventListener("click", setCanvasSize);
+const canvasSizeBtn = document.getElementById("canvasSizeBtn");
+const form = document.querySelector('form')
+form.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target === canvasSizeBtn) {
+  setCanvasSize();
+  }
+});
 
-// function setCanvasSize() {
-//   const canvasWidth = document.getElementById("canvasWidth").value;
-//   const canvasHeight = document.getElementById("canvasHeight").value;
-//   board.width = canvasWidth;
-//   board.height = canvasHeight;
-//   width = canvasWidth;
-//   height = canvasHeight;
-//   clearCanvas();
-// }
+function setCanvasSize() {
+  const canvasWidth = document.getElementById("canvasWidth").value;
+  const canvasHeight = document.getElementById("canvasHeight").value;
+  board.width = canvasWidth;
+  board.height = canvasHeight;
+  width = canvasWidth;
+  height = canvasHeight;
+  clearCanvas();
+}
 //#endregion
-const width = 500;
-const height = 500;
+let width = 500;
+let height = 500;
 const squareSize = 10;
 gameBoard.width = width;
 gameBoard.height = height;
@@ -91,8 +97,7 @@ const gameOverFx = new Audio("./fx/game-over-arcade-6435.mp3")
 
 //GameState
 function main() {
-    timeoutId = setTimeout(function tick() 
-    { 
+    timeoutId = setTimeout(function tick() { 
       buttons.style.display = 'none';
       clearCanvas();    
       slither(); 
@@ -105,10 +110,11 @@ function main() {
       drawSnakehole2();
       bgMusic.play();
       main();
-    }, 750 / snakeSpeed)
+    }, 
+    750 / snakeSpeed)
 
     if (gameOver()) {
-        buttons.style.display = '';
+        buttons.style.display = 'flex';
         boardContext.fillStyle="white";
         boardContext.font="3vw Silkscreen";
         boardContext.fillText("Game Over", gameBoard.clientWidth/5, gameBoard.clientHeight/2.25);
