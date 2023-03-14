@@ -76,7 +76,6 @@ gameBoard.height = height;
   }
 }
 
-main();
 generateSpeed();
 generateSlow();
 generateGrowth();
@@ -86,10 +85,13 @@ document.addEventListener("keydown", nextDirection);
 document.getElementById('easy_button').addEventListener('click', easyGame);
 document.getElementById('medium_button').addEventListener('click', mediumGame);
 document.getElementById('hard_button').addEventListener('click', hardGame);
+const buttons = document.querySelector('#container');
 
+//GameState
 function main() {
     timeoutId = setTimeout(function tick() 
-    {    
+    { 
+      buttons.style.display = 'none';
       clearCanvas();    
       slither(); 
       hiScoreUpdate(); 
@@ -103,12 +105,14 @@ function main() {
     }, 750 / snakeSpeed)
 
     if (gameOver()) {
+        buttons.style.display = '';
         boardContext.fillStyle="white";
         boardContext.font="3vw Silkscreen";
         boardContext.fillText("Game Over", gameBoard.clientWidth/11, gameBoard.clientHeight/2);
         clearTimeout(timeoutId);
       }
  }
+ 
 //#region snake speed adjusting
  const increaseSpeed = () => {
   snakeSpeed += 3;
@@ -268,7 +272,7 @@ function drawSnakePart(snakePart) {
     const teleported1 = snake[0].x === snakehole1x && snake[0].y === snakehole1y;
     const teleported2 = snake[0].x === snakehole2x && snake[0].y === snakehole2y;
     if (eatenGrowth_food) {
-      score += 10;
+      score += 20;
       document.getElementById('score').innerHTML = score;
       generateGrowth();
     } 
@@ -280,7 +284,7 @@ function drawSnakePart(snakePart) {
       snake.pop();
     }
     else if (eatenSlow_food) {
-      score -= 10;
+      score += 10;
       document.getElementById('score').innerHTML = score;
       decreaseSpeed();
       generateSlow();
@@ -305,20 +309,13 @@ function drawSnakePart(snakePart) {
   }
  //#endregion
 
+ //update and keep hi-scores
  function hiScoreUpdate () {
   if (score > hiScore) {
     hiScore = score;
     document.getElementById('hi_score').innerHTML = hiScore;
   }
 }
-
-  // function updateHiScore() {
-  //   if (score > hiScore) {
-  //     hiScore = score;
-  //   }
-  //   const hiScoreElement = document.getElementById("hiScore");
-  //   hiScoreElement.innerText = hiScore.toString();
-  // }
 
   //gameover conditions
   function gameOver() {
@@ -342,14 +339,10 @@ function drawSnakePart(snakePart) {
       {x: 190, y: 200},
       {x: 180, y: 200},
       {x: 170, y: 200},
-      {x: 160, y: 200},
-      {x: 150, y: 200},
-      {x: 140, y: 200},
-      {x: 130, y: 200},
-      {x: 120, y: 200}
+      {x: 160, y: 200}
   ]
     snakeSpeed = 5;
-    dx = 5;
+    dx = 10;
     dy = 0; 
     main();
   }
@@ -364,9 +357,7 @@ function drawSnakePart(snakePart) {
       {x: 170, y: 200},
       {x: 160, y: 200},
       {x: 150, y: 200},
-      {x: 140, y: 200},
-      {x: 130, y: 200},
-      {x: 120, y: 200}
+      {x: 140, y: 200}
   ]
     snakeSpeed = 10;
     dx = 10;
@@ -388,8 +379,8 @@ function drawSnakePart(snakePart) {
       {x: 130, y: 200},
       {x: 120, y: 200}
   ]
-    snakeSpeed = 20;
-    dx = 20;
+    snakeSpeed = 15;
+    dx = 10;
     dy = 0; 
     main();
   }
