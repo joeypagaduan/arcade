@@ -101,6 +101,7 @@ const gameOverFx = new Audio("./fx/game-over-arcade-6435.mp3")
 function main() {
     timeoutId = setTimeout(function tick() { 
       buttons.style.display = 'none';
+      startGameFx.play();
       clearCanvas();    
       slither(); 
       hiScoreUpdate(); 
