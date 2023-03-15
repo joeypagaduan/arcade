@@ -39,26 +39,28 @@ let snakehole2y;
 const board = document.getElementById("gameBoard");
 const boardContext = gameBoard.getContext("2d");
 
-// //#region setting the size
-const canvasSizeBtn = document.getElementById("canvasSizeBtn");
-const form = document.querySelector('form')
-form.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (event.target === canvasSizeBtn) {
-  setCanvasSize();
-  }
-});
+//#region setting the size
+//****I decided not to let user choose canvas size, instead opting for a default of 500 x 500 for better game experience */
+// const canvasSizeBtn = document.getElementById("canvasSizeBtn");
+// const form = document.querySelector('form')
+// form.addEventListener("click", (event) => {
+//   event.preventDefault();
+//   if (event.target === canvasSizeBtn) {
+//   setCanvasSize();
+//   }
+// });
 
-function setCanvasSize() {
-  const canvasWidth = document.getElementById("canvasWidth").value;
-  const canvasHeight = document.getElementById("canvasHeight").value;
-  board.width = canvasWidth;
-  board.height = canvasHeight;
-  width = canvasWidth;
-  height = canvasHeight;
-  clearCanvas();
-}
+// function setCanvasSize() {
+//   const canvasWidth = document.getElementById("canvasWidth").value;
+//   const canvasHeight = document.getElementById("canvasHeight").value;
+//   board.width = canvasWidth;
+//   board.height = canvasHeight;
+//   width = canvasWidth;
+//   height = canvasHeight;
+//   clearCanvas();
+// }
 //#endregion
+
 let width = 500;
 let height = 500;
 const squareSize = 10;
@@ -114,10 +116,13 @@ function main() {
     750 / snakeSpeed)
 
     if (gameOver()) {
-        buttons.style.display = 'flex';
+        buttons.style.display = ''; //css is styling this as flex//
         boardContext.fillStyle="white";
         boardContext.font="3vw Silkscreen";
         boardContext.fillText("Game Over", gameBoard.clientWidth/5, gameBoard.clientHeight/2.25);
+        boardContext.fillStyle="white";
+        boardContext.font="1vw  courier";
+        boardContext.fillText("Music by StudioKolomna and Pixabay", gameBoard.clientWidth/5, gameBoard.clientHeight/1.2);
         bgMusic.pause();
         clearTimeout(timeoutId);
         gameOverFx.play();

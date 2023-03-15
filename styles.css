@@ -4,14 +4,8 @@
 font-family: 'Megrim', cursive;
 font-family: 'Rubik Moonrocks', cursive;
 font-family: 'Silkscreen', cursive; */
-
-/* @font-face {
-  font-family: "fasterOne";
-  src: url ('./fonts/FasterOne-Regular.ttf');
-} */
-
 * {
-  background-color: gray;
+  background-color: black;
 }
 
 header {
@@ -66,7 +60,7 @@ canvas {
   border: none;
   margin-left: 20px;
   padding: 10px 20px;
-  font-size: 1vw;
+  font-size: 1.25vw;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -77,7 +71,13 @@ canvas {
     border: none;
     margin-left: 20px;
     padding: 10px 20px;
-    font-size: 1vw;
+    font-size: 1.5vw;
     cursor: pointer;
     border-radius: 5px;
 }
+
+/* I was using this to style the options for user to change canvas size, but instead opted to set default canvas size to 500px */
+/* #canvas_form_container {
+  display: flex;
+  justify-content: flex-end;
+} */
