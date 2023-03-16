@@ -1,3 +1,5 @@
+CHANGED THEME TO CATERPILLAR
+
 <!-- []  Game updates (keeps on moving) with or without user input -->
         <!-- -slither() -->
         <!-- []tick()? -->

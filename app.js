@@ -1,8 +1,8 @@
 let score = 0;
 let hiScore = 0;
 
-const snakeBody = "red";
-const snakeBorder = "red";
+const snakeBody = "lightgreen";
+const snakeBorder = "gray";
 
 let snake = [
     {x: 200, y: 200},
@@ -101,7 +101,6 @@ const gameOverFx = new Audio("./fx/game-over-arcade-6435.mp3")
 function main() {
     timeoutId = setTimeout(function tick() { 
       buttons.style.display = 'none';
-      startGameFx.play();
       clearCanvas();    
       slither(); 
       hiScoreUpdate(); 
@@ -148,8 +147,11 @@ function drawSnake() {
 function drawSnakePart(snakePart) {
     boardContext.fillStyle = snakeBody;
     boardContext.strokeStyle = snakeBorder;
-    boardContext.fillRect(snakePart.x, snakePart.y, 10, 10);
-    boardContext.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    boardContext.beginPath();
+    boardContext.arc(snakePart.x + 5, snakePart.y + 5, 5, 0, 2 * Math.PI); //had to offset the drawing by 5 pixels on each axis to center the round object on the board
+    boardContext.fill();
+    // boardContext.fillRect(snakePart.x, snakePart.y, 10, 10);
+    // boardContext.strokeRect(snakePart.x, snakePart.y, 10, 10);
   }
   //#endregion
 
@@ -298,7 +300,6 @@ function drawSnakePart(snakePart) {
       document.getElementById('score').innerHTML = score;
       increaseSpeed();
       generateSpeed();
-      snake.pop();
     }
     else if (eatenSlow_food) {
       score += 10;
@@ -311,14 +312,19 @@ function drawSnakePart(snakePart) {
       document.getElementById('score').innerHTML = score;
       snake[0].x = snakehole2x;
       snake[0].y = snakehole2y;
-      snakehole1();
+      setTimeout (() => {
+        snakehole1();
+      }, 900)
+
     }
     else if (teleported2) {
       score +=50;
       document.getElementById('score').innerHTML = score;
       snake[0].x = snakehole1x;
       snake[0].y = snakehole1y;
-      snakehole2();
+      setTimeout (() => {
+        snakehole2();
+      }, 900)
     }
     else {
       snake.pop();
@@ -347,7 +353,7 @@ function drawSnakePart(snakePart) {
     return hitLeft || hitRight || hitTopt || hitBottom
   }
 
-  //#region Reset Game
+  //#region Game Difficulty / Reset Game
   function easyGame() {
     score = 0;
     document.getElementById('score').innerHTML = score;
