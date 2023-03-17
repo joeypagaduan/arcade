@@ -122,7 +122,7 @@ function main() {
         boardContext.fillText("Game Over", gameBoard.clientWidth/5, gameBoard.clientHeight/2.25);
         boardContext.fillStyle="white";
         boardContext.font="1vw  courier";
-        boardContext.fillText("Music by StudioKolomna and Pixabay", gameBoard.clientWidth/5, gameBoard.clientHeight/1.2);
+        boardContext.fillText("Music by AudioCoffee and Pixabay", gameBoard.clientWidth/5, gameBoard.clientHeight/1.2);
         bgMusic.pause();
         clearTimeout(timeoutId);
         gameOverFx.play();
